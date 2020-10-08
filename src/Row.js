@@ -6,6 +6,11 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
+  const getImage = movie => {
+    const imageType = isLargeRow ? movie.poster_path : movie.backdrop_path;
+    return `${base_url}${imageType}`;
+  };
+  const posterClass = `row__poster ${isLargeRow && "row__posterLarge"}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -22,12 +27,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
       <div className='row__posters'>
         {movies.map(movie => (
-          <img
-            className='row__poster'
-            key={movie.id}
-            src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`}
-            alt={movie.name}
-          />
+          <img className={posterClass} key={movie.id} src={getImage(movie)} alt={movie.name} />
         ))}
       </div>
     </div>
