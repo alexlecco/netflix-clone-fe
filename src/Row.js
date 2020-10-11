@@ -22,12 +22,17 @@ function Row({ title, fetchUrl, isLargeRow }) {
   }, [fetchUrl]);
 
   return (
-    <div>
+    <div className='row'>
       <h2>{title}</h2>
 
       <div className='row__posters'>
         {movies.map(movie => (
-          <img className={posterClass} key={movie.id} src={getImage(movie)} alt={movie.name} />
+          <img
+            className={posterClass}
+            key={movie.id}
+            src={getImage(movie)}
+            alt={movie.name}
+          />
         ))}
       </div>
     </div>
